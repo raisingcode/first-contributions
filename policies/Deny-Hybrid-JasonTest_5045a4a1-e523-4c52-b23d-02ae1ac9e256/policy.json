@@ -1,0 +1,49 @@
+{
+ "properties": {
+  "displayName": "Deny-Hybrid-JasonTest",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "createdBy": "b837ff0b-33ca-4aa1-8005-3a488b5acbd2",
+   "createdOn": "2022-04-15T21:21:00.5753438Z",
+   "updatedBy": "b837ff0b-33ca-4aa1-8005-3a488b5acbd2",
+   "updatedOn": "2022-04-15T21:58:00.0000174Z"
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "in": [
+       "Microsoft.Compute/virtualMachines",
+       "Microsoft.Compute/VirtualMachineScaleSets"
+      ]
+     },
+     {
+      "field": "Microsoft.Compute/licenseType",
+      "exists": true
+     },
+     {
+      "not": {
+       "allOf": [
+        {
+         "field": "Microsoft.Compute/imageOffer",
+         "in": [
+          "Windows-10"
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/subscriptions/87f6bf8a-895c-4998-81eb-4adabbf8a566/providers/Microsoft.Authorization/policyDefinitions/5045a4a1-e523-4c52-b23d-02ae1ac9e256",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "5045a4a1-e523-4c52-b23d-02ae1ac9e256"
+}
